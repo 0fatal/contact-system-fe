@@ -1,5 +1,6 @@
 import axios from 'axios'
 import { Message } from 'element-ui'
+import router from '@/router'
 
 export const baseURL = 'http://localhost:7001/api'
 
@@ -15,7 +16,7 @@ axios.interceptors.response.use(
         if (res.data.code === -1) {
             Message.error(res.data.msg)
             if (res.data.msg === '需要登录') {
-                window.location.replace('/login')
+                router.replace('/login')
             }
             return Promise.reject(res)
         }
