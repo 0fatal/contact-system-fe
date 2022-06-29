@@ -1,7 +1,7 @@
 import axios from 'axios'
 import { Message } from 'element-ui'
 
-export const baseURL = 'https://contractbc.onrender.com'
+export const baseURL = 'https://contactbc.onrender.com'
 
 axios.defaults.baseURL = baseURL
 axios.defaults.withCredentials = true
