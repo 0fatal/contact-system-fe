@@ -9,27 +9,45 @@
         :default-active="$route.path"
         router
     >
+        <h1 class="text-yellow-300">违约客户管理系统</h1>
+        <hr />
         <el-menu-item index="/">
-            <i class="el-icon-menu"></i>
-            <span slot="title">首页</span>
-        </el-menu-item>
-        <el-menu-item index="/publish">
             <i class="el-icon-document"></i>
-            <span slot="title">发布文章</span>
+            <span slot="title">违约认定申请</span>
         </el-menu-item>
-        <el-menu-item index="/article">
+        <el-menu-item index="/refresh/apply">
             <i class="el-icon-setting"></i>
-            <span slot="title">文章列表</span>
+            <span slot="title">重生认定申请</span>
         </el-menu-item>
-        <el-menu-item index="/profile">
+        <template v-if="role === '1'">
+            <el-menu-item index="/identify/check">
+                <i class="el-icon-setting"></i>
+                <span slot="title">违约认定审核</span>
+            </el-menu-item>
+            <el-menu-item index="/refresh/check">
+                <i class="el-icon-setting"></i>
+                <span slot="title">重生认定审核</span>
+            </el-menu-item>
+            <el-menu-item index="/reason">
+                <i class="el-icon-setting"></i>
+                <span slot="title">违约/重生 理由管理</span>
+            </el-menu-item>
+        </template>
+        <el-menu-item index="/statistics">
             <i class="el-icon-setting"></i>
-            <span slot="title">我的信息</span>
+            <span slot="title">违约统计</span>
         </el-menu-item>
     </el-menu>
 </template>
 
 <script>
 export default {
+    data() {
+        return {
+            role: '',
+        }
+    },
+
     methods: {
         handleOpen(key, keyPath) {
             console.log(key, keyPath)
@@ -37,6 +55,10 @@ export default {
         handleClose(key, keyPath) {
             console.log(key, keyPath)
         },
+    },
+
+    created() {
+        this.role = localStorage.getItem('role')
     },
 }
 </script>

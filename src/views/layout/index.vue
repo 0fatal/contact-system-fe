@@ -3,13 +3,13 @@
         <el-aside width="200px">
             <Aside class="aside" />
         </el-aside>
-        <el-main class="main" style="padding: 0">
+        <el-main style="padding: 0">
             <el-header>
                 <Header></Header>
             </el-header>
-            <el-main>
+            <el-container class="main">
                 <router-view />
-            </el-main>
+            </el-container>
         </el-main>
     </el-container>
 </template>
@@ -51,6 +51,10 @@ export default {
 
 .el-main {
     background: #f6f6f6;
+}
+
+.main {
+    padding: 10px;
 }
 
 .el-header {

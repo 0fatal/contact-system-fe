@@ -1,15 +1,34 @@
 <template>
     <div class="header">
         <div class="info">
-            <div class="avatar">
-                <el-avatar
-                    src="https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png"
-                ></el-avatar>
-            </div>
-            <div class="nickname">你好</div>
+            <div class="nickname">{{ user.nickname }}</div>
+        </div>
+        <div class="logout">
+            <a
+                @click="$router.push('/login')"
+                class="text-blue-400 text-sm pr-3 cursor-pointer"
+                >退出</a
+            >
         </div>
     </div>
 </template>
+
+<script>
+import { ApiGet } from '@/utils/request'
+
+export default {
+    name: 'Header',
+    data() {
+        return {
+            user: {},
+        }
+    },
+    async created() {
+        const user = await ApiGet('/user/info')
+        this.user = user
+    },
+}
+</script>
 
 <style>
 .header {

@@ -1,7 +1,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Layout from '@/views/layout'
-import store from '@/store'
 
 Vue.use(VueRouter)
 
@@ -11,20 +10,28 @@ const routes = [
         component: Layout,
         children: [
             {
-                path: '/publish',
-                component: () => import('@/views/publish/index.vue'),
-            },
-            {
-                path: '/profile',
-                component: () => import('@/views/profile/index.vue'),
-            },
-            {
-                path: '/article',
-                component: () => import('@/views/article/index.vue'),
-            },
-            {
                 path: '/',
-                component: () => import('@/views/home/index.vue'),
+                component: () => import('@/views/identifyApply/index.vue'),
+            },
+            {
+                path: '/identify/check',
+                component: () => import('@/views/identifyCheck/index.vue'),
+            },
+            {
+                path: '/reason',
+                component: () => import('@/views/reason/index.vue'),
+            },
+            {
+                path: '/refresh/apply',
+                component: () => import('@/views/refreshApply/index.vue'),
+            },
+            {
+                path: '/refresh/check',
+                component: () => import('@/views/refreshCheck/index.vue'),
+            },
+            {
+                path: '/statistics',
+                component: () => import('@/views/statistics/index.vue'),
             },
         ],
     },
@@ -38,15 +45,6 @@ const router = new VueRouter({
     mode: 'history',
     base: process.env.BASE_URL,
     routes,
-})
-
-router.beforeEach((to, from, next) => {
-    if (!store.getters.isLogin && to.path !== '/login') {
-        next('/login')
-        return
-    }
-
-    next()
 })
 
 export default router

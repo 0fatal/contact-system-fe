@@ -2,7 +2,7 @@
     <div class="flex justify-center items-center bg-blue-200 w-screen h-screen">
         <el-card class="w-[400px] mt-[50px] h-[300px]">
             <div slot="header">
-                <span>登录</span>
+                <span>违约客户管理系统登录</span>
             </div>
             <div>
                 <el-form
@@ -24,7 +24,7 @@
                         ></el-input>
                     </el-form-item>
                     <el-button
-                        class="text-black w-[200px]"
+                        class="w-[200px]"
                         type="primary"
                         @click="handleLogin"
                         >登录</el-button
@@ -36,13 +36,15 @@
 </template>
 
 <script>
+import { ApiGet, ApiPost } from '@/utils/request'
+
 export default {
     name: 'Login',
     data() {
         return {
             form: {
-                username: '',
-                password: '',
+                username: 'admin',
+                password: 'admin',
             },
             rules: {
                 username: [
@@ -60,21 +62,15 @@ export default {
     },
 
     methods: {
-        handleLogin() {
-            this.$refs.form.validate(async (valid) => {
-                if (valid) {
-                    const res = await this.$store.dispatch('login', {
-                        username: this.form.username,
-                        password: this.form.password,
-                    })
-                    if (res) {
-                        this.$message.success('登录成功')
-                        this.$router.push('/')
-                    } else {
-                        this.$message.error('登录失败，账号或密码错误')
-                    }
-                }
+        async handleLogin() {
+            await ApiPost('/login', {
+                username: this.form.username,
+                password: this.form.password,
             })
+            const user = await ApiGet('/user/info')
+            localStorage.setItem('role', user.role + '')
+            this.$message.success('登录成功')
+            this.$router.push('/')
         },
     },
 }
