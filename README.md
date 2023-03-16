@@ -1,4 +1,8 @@
-# demo
+# 违约用户管理系统
+> 基于 Vue2 + ElementUI + EChart 的违约用户管理系统前端
+
+<img src="screenshot/1.png" />
+<img src="screenshot/2.png" />
 
 ## Project setup
 ```
@@ -15,5 +19,3 @@ pnpm run serve
 pnpm run build
 ```
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
